@@ -1,0 +1,50 @@
+
+<!-- saved from url=(0014)about:internet -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RES (Random Encryption Standard)</title>
+    <script type="text/javascript" src="./RES (Random Encryption Standard)_files/res.js.下載"></script>
+    <link rel="stylesheet" href="./RES (Random Encryption Standard)_files/fonts.css">
+    <link rel="stylesheet" href="./RES (Random Encryption Standard)_files/main.css">
+
+</head>
+
+<body class="bg-black01" data-new-gr-c-s-check-loaded="14.1054.0" data-gr-ext-installed="">
+    <div class="bd">
+        <div class="text-center">
+            <img src="./RES (Random Encryption Standard)_files/title.png">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Plaintext</span>
+            </div>
+            <input type="text" class="form-control" id="plain_input">
+        </div>
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-default">Encrypted text</span>
+            </div>
+            <input type="text" class="form-control" id="enc_input" onchange="">
+        </div>
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="btn">Encrypt!</button>
+    </div>
+    <div class="text-center font-weight-bold">
+        My secret password: N9Nb2sPYFl6sEbVORzuK1kUXMvs+/LbyrTpJaxQj3fdDhXyKN8mBELPRTX5904o9
+    </div>
+    <script type="text/javascript">
+        document.getElementById("btn").onclick = function () {
+            const block_size = 16;
+            var plain = document.getElementById("plain_input").value
+            var plain_length = plain.length
+            if (plain_length !== 0) {
+                var block_length = (parseInt(plain_length / block_size) + 1) * block_size
+                var intArray = intArrayFromString(plain);
+                intArray.length = block_length;
+                var ptr = Module.allocate(intArray, Module.ALLOC_NORMAL);
+                var rand_enc = Module.cwrap('random_enc', 'string', ['number', 'number']);
+                document.getElementById("enc_input").value = rand_enc(ptr, block_length);
+            }
+        };
+    </script>
+
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration></html>
